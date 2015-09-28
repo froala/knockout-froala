@@ -36,9 +36,11 @@
   ],
   "dependencies": {
     "froala-wysiwyg-editor": "https://github.com/froala/wysiwyg-editor.git#2.0.0-rc.2",
-    "knockout": "~3.3.0"
+    "knockout": "~3.3.0",
+    "jquery": "1.11.0"
   },
   "resolutions": {
-    "knockout": "2.3"
+    "knockout": "2.3",
+    "jquery": "1.11.0"
   }
 }
