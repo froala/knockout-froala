@@ -2,7 +2,7 @@
  * knockout binding for Froala Editor
  */
 
-ko.bindingHandlers.froalaEditor = (function() { 'use strict';
+ko.bindingHandlers.froala = (function() { 'use strict';
 
   // locals
   var unwrap = ko.utils.unwrapObservable;
@@ -20,10 +20,11 @@ ko.bindingHandlers.froalaEditor = (function() { 'use strict';
   function init( element, value, bindings ) {
     var $el = $( element );
     var model = value();
-    var options = unwrap( bindings() ).froalaEditorOptions || {};
+    var allBindings = unwrap( bindings() );
+    var options = unwrap( allBindings.froalaOptions );
 
     // initialize the editor
-    $el.froalaEditor( options );
+    $el.froalaEditor( options || {} );
 
     // update underlying model whenever editor content changed
     $el.on('froalaEditor.contentChanged', function (e, editor) {
@@ -37,7 +38,10 @@ ko.bindingHandlers.froalaEditor = (function() { 'use strict';
     });
 
     // cleanup editor, when dom node is removed
-    ko.utils.domNodeDisposal.addDisposeCallback( element, destroy( element ) )
+    ko.utils.domNodeDisposal.addDisposeCallback( element, destroy( element ) );
+
+    // do not handle child nodes
+    return { controlsDescendantBindings: true };
   }
 
   /**
@@ -53,6 +57,11 @@ ko.bindingHandlers.froalaEditor = (function() { 'use strict';
     var $el = $( element );
     var modelValue = unwrap( value() );
     var editorInstance = $el.data( 'froala.editor' );
+
+    if( editorInstance == null ) {
+      return;
+    }
+
     var editorValue = editorInstance.html.get();
 
     // avoid any un-necessary updates

@@ -24,7 +24,7 @@ this.editorOptions = {
 ```
 
 ```html
-<textarea data-bind="value: comments, froalaEditor: comments, froalaEditorOptions: editorOptions"></textarea>
+<textarea data-bind="value: comments, froala: comments, froalaOptions: editorOptions"></textarea>
 ```
 
 ## License
