@@ -1,0 +1,37 @@
+{
+  "name": "knockout-froala",
+  "version": "0.0.1",
+  "homepage": "https://github.com/anasnakawa/knockout-froala",
+  "authors": [
+    "Anas Nakawa <anas.nakawa@gmail.com>"
+  ],
+  "description": "Knockout.js binding for Froala WYSIWYG HTML Rich Text Editor",
+  "main": "src/knockout-froala.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "knockout",
+    "froala",
+    "knockout.js",
+    "html",
+    "text",
+    "editor",
+    "wysiwyg",
+    "rich",
+    "editor",
+    "rich",
+    "text",
+    "editor",
+    "rte",
+    "javascript"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
