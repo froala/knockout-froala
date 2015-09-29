@@ -21,7 +21,7 @@ ko.bindingHandlers.froala = (function() { 'use strict';
     var $el = $( element );
     var model = value();
     var allBindings = unwrap( bindings() );
-    var options = unwrap( allBindings.froalaOptions );
+    var options = ko.toJS( allBindings.froalaOptions );
 
     // initialize the editor
     $el.froalaEditor( options || {} );
