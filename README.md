@@ -10,22 +10,34 @@ to enable Froala binding on a textarea, you need to provide the following bindin
 * `froalaEditorOptions`: a plain object or an observable that will hold all the options to initalize the editor
 
 ```js
-// view model
-this.comments = ko.observable();
-this.editorOptions = {
-  // disable wrapping content with paragraphs
-  // instead <br> will be used
-  enter: $.FroalaEditor.ENTER_DIV,
+var viewModel = {
+  comments: ko.observable(),
+  options: {
+    // disable wrapping content with paragraphs
+    // instead <br> will be used
+    enter: $.FroalaEditor.ENTER_DIV,
 
-  // we like gray!
-  theme: 'gray',
-  toolbarButtons: [ 'bold', 'italic', 'underline' ]
+    // we like gray!
+    theme: 'gray',
+    toolbarButtons: [ 'bold', 'italic', 'underline' ]
+  }
 }
+
+ko.applyBindings( viewModel );
 ```
+
+Using a `<textarea>`
 
 ```html
 <textarea data-bind="value: comments, froala: comments, froalaOptions: editorOptions"></textarea>
 ```
+
+or a `<div>`
+
+```html
+<div data-bind="froala: comments, froalaOptions: editorOptions"></div>
+```
+
 
 ## License
 
