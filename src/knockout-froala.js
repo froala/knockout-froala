@@ -2,10 +2,11 @@
  * knockout binding for Froala Editor
  */
 
-ko.bindingHandlers.froala = (function() { 'use strict';
+(function() { 'use strict';
 
   // locals
   var unwrap = ko.utils.unwrapObservable;
+
 
   /**
    * initiate froala editor, listen to its changes
@@ -26,6 +27,11 @@ ko.bindingHandlers.froala = (function() { 'use strict';
     // initialize the editor
     $el.froalaEditor( options || {} );
 
+    // provide froala editor instance for flexibility
+    if( allBindings.froalaInstance && ko.isWritableObservable( allBindings.froalaInstance ) ) {
+      allBindings.froalaInstance( $el.data( 'froala.editor' ) );
+    }
+
     // update underlying model whenever editor content changed
     $el.on('froalaEditor.contentChanged', function (e, editor) {
       if( ko.isWriteableObservable( model ) ) {
@@ -43,6 +49,7 @@ ko.bindingHandlers.froala = (function() { 'use strict';
     // do not handle child nodes
     return { controlsDescendantBindings: true };
   }
+
 
   /**
    * update froala editor whenever underlying observable model
@@ -65,10 +72,11 @@ ko.bindingHandlers.froala = (function() { 'use strict';
     var editorValue = editorInstance.html.get();
 
     // avoid any un-necessary updates
-    if( editorValue !== modelValue ) {
+    if( editorValue !== modelValue && typeof modelValue === 'string' ) {
       editorInstance.html.set( modelValue );
     }
   }
+
 
   /**
    * destroy froala editor instance
@@ -87,11 +95,12 @@ ko.bindingHandlers.froala = (function() { 'use strict';
     }
   }
 
+
   /**
    * expose `froala` binding handler methods
    */
 
-  return {
+  ko.bindingHandlers.froala = {
     init: init,
     update: update
   }

@@ -6,8 +6,9 @@ Knockout.js binding for Froala WYSIWYG HTML Rich Text Editor
 
 to enable Froala binding on a textarea, you need to provide the following binding handlers 
 
-* `froalaEditor`: the model observable behind the editor
-* `froalaEditorOptions`: a plain object or an observable that will hold all the options to initalize the editor
+* `froala`: the model observable behind the editor
+* `froalaOptions`: a plain object or an observable that will hold all the options to initalize the editor
+* `froalaInstance`: [ optional ] if provided, froala instance will be stored in this observable once initialized ( should be observable ) 
 
 ```js
 var viewModel = {
