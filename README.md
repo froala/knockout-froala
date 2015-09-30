@@ -1,6 +1,20 @@
 ## knockout-froala
 
-Knockout.js binding for Froala WYSIWYG HTML Rich Text Editor
+Knockout.js binding for Froala WYSIWYG HTML Rich Text Editor ( Version 2 )
+
+## Install
+
+using Bower
+
+```bash
+bower install knockout-froala
+```
+
+using npm
+
+```bash
+npm install knockout-froala
+```
 
 ## Usage
 
@@ -38,7 +52,6 @@ or a `<div>`
 ```html
 <div data-bind="froala: comments, froalaOptions: editorOptions"></div>
 ```
-
 
 ## License
 
