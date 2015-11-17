@@ -1,9 +1,10 @@
 {
   "name": "knockout-froala",
-  "version": "0.1.1",
+  "version": "2.0.1",
   "homepage": "https://github.com/froala/knockout-froala",
   "authors": [
-    "Anas Nakawa <anas.nakawa@gmail.com>"
+    "Anas Nakawa <anas.nakawa@gmail.com>",
+    "Stefan Neculai <stefan@froala.com>"
   ],
   "description": "Knockout.js binding for Froala WYSIWYG HTML Rich Text Editor",
   "main": "src/knockout-froala.js",
@@ -35,7 +36,7 @@
     "tests"
   ],
   "dependencies": {
-    "froala-wysiwyg-editor": "https://github.com/froala/wysiwyg-editor.git#2.0.0-rc.2",
+    "froala-wysiwyg-editor": "2.0.1",
     "knockout": "~3.3.0",
     "jquery": "1.11.0"
   },
