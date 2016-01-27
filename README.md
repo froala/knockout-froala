@@ -44,13 +44,13 @@ ko.applyBindings( viewModel );
 Using a `<textarea>`
 
 ```html
-<textarea data-bind="value: comments, froala: comments, froalaOptions: editorOptions"></textarea>
+<textarea data-bind="value: comments, froala: comments, froalaOptions: options"></textarea>
 ```
 
 or a `<div>`
 
 ```html
-<div data-bind="froala: comments, froalaOptions: editorOptions"></div>
+<div data-bind="froala: comments, froalaOptions: options"></div>
 ```
 
 ## License
