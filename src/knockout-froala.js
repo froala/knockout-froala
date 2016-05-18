@@ -72,7 +72,7 @@
     var editorValue = editorInstance.html.get();
 
     // avoid any un-necessary updates
-    if( editorValue !== modelValue && typeof modelValue === 'string' ) {
+    if( editorValue !== modelValue && (typeof modelValue === 'string'  || modelValue === null)) {
       editorInstance.html.set( modelValue );
     }
   }
