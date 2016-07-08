@@ -28,7 +28,7 @@
     $el.froalaEditor( options || {} );
 
     // provide froala editor instance for flexibility
-    if( allBindings.froalaInstance && ko.isWritableObservable( allBindings.froalaInstance ) ) {
+    if( allBindings.froalaInstance && ko.isWriteableObservable( allBindings.froalaInstance ) ) {
       allBindings.froalaInstance( $el.data( 'froala.editor' ) );
     }
 
