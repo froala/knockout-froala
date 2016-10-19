@@ -1,6 +1,6 @@
-## knockout-froala
+# Knockout Froala WYSIWYG HTML Editor
 
-Knockout.js binding for Froala WYSIWYG HTML Rich Text Editor ( Version 2 )
+>Knockout.js binding for Froala WYSIWYG HTML Rich Text Editor ( Version 2 )
 
 ## Install
 
