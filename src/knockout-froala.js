@@ -33,15 +33,18 @@
     }
 
     // update underlying model whenever editor content changed
-    $el.on('froalaEditor.contentChanged', function (e, editor) {
-      if( ko.isWriteableObservable( model ) ) {
-        var editorValue = editor.html.get();
-        var current = model();
-        if(current !== editorValue) {
-          model( editorValue );
+    var processUpdateEvent = function (e, editor) {
+        if (ko.isWriteableObservable(model)) {
+            var editorValue = editor.html.get();
+            var current = model();
+            if (current !== editorValue) {
+                model(editorValue);
+            }
         }
-      }
-    });
+    }
+
+    $el.on('froalaEditor.contentChanged', processUpdateEvent);
+    $el.on('froalaEditor.paste.after', processUpdateEvent);
 
     // cleanup editor, when dom node is removed
     ko.utils.domNodeDisposal.addDisposeCallback( element, destroy( element ) );
