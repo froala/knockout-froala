@@ -1,5 +1,9 @@
 # Knockout Froala WYSIWYG HTML Editor
 
+[![npm](https://img.shields.io/npm/v/knockout-froala.svg)](https://www.npmjs.com/package/knockout-froala)
+[![npm](https://img.shields.io/npm/dm/knockout-froala.svg)](https://www.npmjs.com/package/knockout-froala)
+[![npm](https://img.shields.io/npm/l/knockout-froala.svg)](https://www.npmjs.com/package/knockout-froala)
+
 >Knockout.js binding for Froala WYSIWYG HTML Rich Text Editor ( Version 2 )
 
 ## Install
