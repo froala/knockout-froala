@@ -24,6 +24,11 @@
     var allBindings = unwrap( bindings() );
     var options = ko.toJS( allBindings.froalaOptions );
 
+    // register events before initializing the editor
+    for( var eventName in allBindings.froalaEvents ) {
+      $el.on( 'froalaEditor.' + eventName, allBindings.froalaEvents[eventName] );
+    }
+
     // initialize the editor
     $el.froalaEditor( options || {} );
 
