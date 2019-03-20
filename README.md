@@ -34,7 +34,7 @@ var viewModel = {
   options: {
     // disable wrapping content with paragraphs
     // instead <br> will be used
-    enter: $.FroalaEditor.ENTER_DIV,
+    enter: FroalaEditor.ENTER_DIV,
 
     // we like gray!
     theme: 'gray',
