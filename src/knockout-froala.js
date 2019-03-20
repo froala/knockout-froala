@@ -42,6 +42,10 @@
 options.events = {
   initialized: function() {
     editorInstance=this;
+    // provide froala editor instance for flexibility
+    if(allBindings.froalaInstance && ko.isWriteableObservable( allBindings.froalaInstance ) ) {
+      allBindings.froalaInstance( editorInstance );
+    }
   },
   'contentChanged': processUpdateEvent,
   'paste.after':processUpdateEvent
@@ -49,10 +53,7 @@ options.events = {
  new FroalaEditor(element,options||{});
  
 
-    // provide froala editor instance for flexibility
-    if(allBindings.froalaInstance && ko.isWriteableObservable( allBindings.froalaInstance ) ) {
-      allBindings.froalaInstance( editorInstance );
-    }
+    
 
     
 
