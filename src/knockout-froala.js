@@ -6,8 +6,7 @@
 
   // locals
   var unwrap = ko.utils.unwrapObservable;
-
-
+  var editorInstance =null;
   /**
    * initiate froala editor, listen to its changes
    * and updates the underlying observable model
@@ -19,32 +18,44 @@
    */
 
   function init( element, value, bindings ) {
-    var $el = $( element );
+   
     var model = value();
     var allBindings = unwrap( bindings() );
     var options = ko.toJS( allBindings.froalaOptions );
 
-    // initialize the editor
-    $el.froalaEditor( options || {} );
-
-    // provide froala editor instance for flexibility
-    if( allBindings.froalaInstance && ko.isWriteableObservable( allBindings.froalaInstance ) ) {
-      allBindings.froalaInstance( $el.data( 'froala.editor' ) );
-    }
 
     // update underlying model whenever editor content changed
-    var processUpdateEvent = function (e, editor) {
-        if (ko.isWriteableObservable(model)) {
-            var editorValue = editor.html.get();
-            var current = model();
-            if (current !== editorValue) {
-                model(editorValue);
-            }
+    var processUpdateEvent = function (e) {
+    
+      if (ko.isWriteableObservable(model)) {
+        if(editorInstance!=null)
+        {
+          var editorValue = editorInstance.html.get();
+          var current = model();
+          if (current !== editorValue) {
+              model(editorValue);
+          }
         }
+        
+      }
+  }
+options.events = {
+  initialized: function() {
+    editorInstance=this;
+    // provide froala editor instance for flexibility
+    if(allBindings.froalaInstance && ko.isWriteableObservable( allBindings.froalaInstance ) ) {
+      allBindings.froalaInstance( editorInstance );
     }
+  },
+  'contentChanged': processUpdateEvent,
+  'paste.after':processUpdateEvent
+}
+ new FroalaEditor(element,options||{});
+ 
 
-    $el.on('froalaEditor.contentChanged', processUpdateEvent);
-    $el.on('froalaEditor.paste.after', processUpdateEvent);
+    
+
+    
 
     // cleanup editor, when dom node is removed
     ko.utils.domNodeDisposal.addDisposeCallback( element, destroy( element ) );
@@ -64,19 +75,19 @@
    */
 
   function update( element, value ) {
-    var $el = $( element );
+  
     var modelValue = unwrap( value() );
-    var editorInstance = $el.data( 'froala.editor' );
-
-    if( editorInstance == null ) {
+ 
+    if( editorInstance == null  ) {
       return;
     }
-
-    var editorValue = editorInstance.html.get();
-
+    
+     var editorValue = editorInstance.html.get();
+     
     // avoid any un-necessary updates
     if( editorValue !== modelValue && (typeof modelValue === 'string'  || modelValue === null)) {
       editorInstance.html.set( modelValue );
+     
     }
   }
 
@@ -90,10 +101,9 @@
    */
 
   function destroy( element ) {
-    var $el = $( element );
     return function() {
-      if( $el.data( 'froala.editor' ) ) {
-        $el.froalaEditor( 'destroy' );
+      if( editorInstance!=null ) {
+        editorInstance.destroy();
       }
     }
   }
