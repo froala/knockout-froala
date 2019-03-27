@@ -61,7 +61,9 @@ or a `<div>`
 ## How to use with require js
 In order to use knockout-froala with require js, you require code snippet similar to following:
 
+
 1. // Froala Editor plugins list.
+
     var fe_plugins = ['align', 'char_counter', 'code_view', 'colors', 'draggable', 'emoticons',
                       'entities', 'file', 'font_family', 'font_size', 'fullscreen',
                       'image_manager', 'image', 'inline_style', 'line_breaker',
@@ -71,6 +73,7 @@ In order to use knockout-froala with require js, you require code snippet simila
     var paths = {
       'app': '../app',
       'FroalaEditor': '../../../bower_components/froala-wysiwyg-editor/js/froala_editor.min',
+
       'knockout':'../../../bower_components/knockout/dist/knockout.debug',
       'knockout-froala':'../../../src/knockout-froala'
     };
@@ -79,11 +82,13 @@ In order to use knockout-froala with require js, you require code snippet simila
       paths['fe_' + fe_plugins[i]] = '../../../bower_components/froala-wysiwyg-editor/js/plugins/' + fe_plugins[i] + '.min';
     }
     var shim = {
+
    
     };
     for (var i = 0; i < fe_plugins.length; i++) {
       shim['fe_' + fe_plugins[i]] = {
         deps: ['FroalaEditor']
+
       }
     }
     // Init RequireJS.
@@ -94,8 +99,10 @@ In order to use knockout-froala with require js, you require code snippet simila
     });
 
     // Load the main app module to start the app
+
     
     requirejs(["app"]);
+
 
 Where:
 1.fe_plugins denote list of froala plugins.
@@ -135,6 +142,7 @@ requirejs(["fe_image","fe_char_counter"], function() {
 })
 })
 })
+
 
 A Requirejs demo app is included in the repository. You can refer it for more details.
  

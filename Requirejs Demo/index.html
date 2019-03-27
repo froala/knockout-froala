@@ -8,7 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Froala files -->
-
   <link rel="stylesheet" href="../bower_components/froala-wysiwyg-editor/css/froala_editor.min.css" />
   <link rel="stylesheet" href="../bower_components/froala-wysiwyg-editor/css/froala_style.min.css" />
 
@@ -46,8 +45,10 @@
 
     <br>
   </div>
+
  
   <script data-main="js/app" src="js/lib/require.js"></script>
+
 
   <script>
     // Froala Editor plugins list.
@@ -59,7 +60,9 @@
     // Define paths.
     var paths = {
       'app': '../app',
+
       'FroalaEditor': '../../../bower_components/froala-wysiwyg-editor/js/froala_editor.min',
+
       'knockout':'../../../bower_components/knockout/dist/knockout.debug',
       'knockout-froala':'../../../src/knockout-froala'
     };
@@ -68,11 +71,13 @@
       paths['fe_' + fe_plugins[i]] = '../../../bower_components/froala-wysiwyg-editor/js/plugins/' + fe_plugins[i] + '.min';
     }
     var shim = {
+
    
     };
     for (var i = 0; i < fe_plugins.length; i++) {
       shim['fe_' + fe_plugins[i]] = {
         deps: ['FroalaEditor']
+
       }
     }
     // Init RequireJS.
@@ -86,6 +91,7 @@
     
     requirejs(["app"]);
    
+
   </script>
 
 </body>
