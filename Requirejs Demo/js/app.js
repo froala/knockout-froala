@@ -1,21 +1,31 @@
-// Load the editor and the plugins we need.
-define(["jquery","froala_editor", "fe_image", "fe_link"], function($,a,b,c) {
+
+requirejs(["knockout"],function(ko)
+{
+window.ko=ko;
+requirejs(["FroalaEditor"],function(FroalaEditor)
+{
+ window.FroalaEditor = FroalaEditor;
+requirejs(["knockout-froala"],function()
+{
+
+
+requirejs(["fe_image","fe_char_counter"], function() {
 
   (function(){
     var viewModel = {
       html: ko.observable( '' ),
       options: {
-        // disable wrapping content with paragraphs
-        // instead <br> will be used
-        enter: $.FroalaEditor.ENTER_DIV,
-        theme: 'gray'
+        enter: FroalaEditor.ENTER_DIV,
+        theme: 'gray',
+        charCounterMax:150
       }
     }
   
     ko.applyBindings( viewModel, document.getElementById( 'app' ) );
   })();
-    /**
- * knockout binding for Froala Editor
- */
+   
 
+})
+})
+})
 })
