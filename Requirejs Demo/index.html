@@ -8,7 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Froala files -->
-  <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css" />
   <link rel="stylesheet" href="../bower_components/froala-wysiwyg-editor/css/froala_editor.min.css" />
   <link rel="stylesheet" href="../bower_components/froala-wysiwyg-editor/css/froala_style.min.css" />
 
@@ -47,7 +46,10 @@
     <br>
   </div>
 
+ 
   <script data-main="js/app" src="js/lib/require.js"></script>
+
+
   <script>
     // Froala Editor plugins list.
     var fe_plugins = ['align', 'char_counter', 'code_view', 'colors', 'draggable', 'emoticons',
@@ -58,8 +60,9 @@
     // Define paths.
     var paths = {
       'app': '../app',
-      'jquery': 'https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min',
-      'froala_editor': '../../../bower_components/froala-wysiwyg-editor/js/froala_editor.min',
+
+      'FroalaEditor': '../../../bower_components/froala-wysiwyg-editor/js/froala_editor.min',
+
       'knockout':'../../../bower_components/knockout/dist/knockout.debug',
       'knockout-froala':'../../../src/knockout-froala'
     };
@@ -68,11 +71,13 @@
       paths['fe_' + fe_plugins[i]] = '../../../bower_components/froala-wysiwyg-editor/js/plugins/' + fe_plugins[i] + '.min';
     }
     var shim = {
-      'froala_editor': {deps: ['jquery']}
+
+   
     };
     for (var i = 0; i < fe_plugins.length; i++) {
       shim['fe_' + fe_plugins[i]] = {
-        deps: ['froala_editor']
+        deps: ['FroalaEditor']
+
       }
     }
     // Init RequireJS.
@@ -83,14 +88,10 @@
     });
 
     // Load the main app module to start the app
-    requirejs(["knockout"],function(ko)
-    {
-    window.ko=ko;
-    requirejs(["knockout-froala"],function(knockout_froala)
-    {
+    
     requirejs(["app"]);
-    })
-  })
+   
+
   </script>
 
 </body>

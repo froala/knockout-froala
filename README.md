@@ -61,7 +61,9 @@ or a `<div>`
 ## How to use with require js
 In order to use knockout-froala with require js, you require code snippet similar to following:
 
-// Froala Editor plugins list.
+
+1. // Froala Editor plugins list.
+
     var fe_plugins = ['align', 'char_counter', 'code_view', 'colors', 'draggable', 'emoticons',
                       'entities', 'file', 'font_family', 'font_size', 'fullscreen',
                       'image_manager', 'image', 'inline_style', 'line_breaker',
@@ -70,8 +72,8 @@ In order to use knockout-froala with require js, you require code snippet simila
     // Define paths.
     var paths = {
       'app': '../app',
-      'jquery': 'https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min',
-      'froala_editor': '../../../bower_components/froala-wysiwyg-editor/js/froala_editor.min',
+      'FroalaEditor': '../../../bower_components/froala-wysiwyg-editor/js/froala_editor.min',
+
       'knockout':'../../../bower_components/knockout/dist/knockout.debug',
       'knockout-froala':'../../../src/knockout-froala'
     };
@@ -80,11 +82,13 @@ In order to use knockout-froala with require js, you require code snippet simila
       paths['fe_' + fe_plugins[i]] = '../../../bower_components/froala-wysiwyg-editor/js/plugins/' + fe_plugins[i] + '.min';
     }
     var shim = {
-      'froala_editor': {deps: ['jquery']}
+
+   
     };
     for (var i = 0; i < fe_plugins.length; i++) {
       shim['fe_' + fe_plugins[i]] = {
-        deps: ['froala_editor']
+        deps: ['FroalaEditor']
+
       }
     }
     // Init RequireJS.
@@ -95,23 +99,50 @@ In order to use knockout-froala with require js, you require code snippet simila
     });
 
     // Load the main app module to start the app
-    requirejs(["knockout"],function(ko)
-    {
-    window.ko=ko;
-    requirejs(["knockout-froala"],function(knockout_froala)
-    {
+
+    
     requirejs(["app"]);
-    })
-  })
+
 
 Where:
 1.fe_plugins denote list of froala plugins.
 2.paths variable defines the path of all resources.
 3.shim variable defines dependencies among  js files.
-4.knockout.debug.js is loaded first because it returns a object(ko) required for accessing knockout variables and methods.
-This variable is made global.
-5.knockout-froala is loaded next because it defines the froala bindings required by main app.
-6.Finally app.js is loaded which contains the logic of your app.
+4.app.js  contains the logic of your app.
+
+2. Here is app.js code:
+
+requirejs(["knockout"],function(ko)
+{
+window.ko=ko;
+requirejs(["FroalaEditor"],function(FroalaEditor)
+{
+ window.FroalaEditor = FroalaEditor;
+requirejs(["knockout-froala"],function()
+{
+
+
+requirejs(["fe_image","fe_char_counter"], function() {
+
+  (function(){
+    var viewModel = {
+      html: ko.observable( '' ),
+      options: {
+        enter: FroalaEditor.ENTER_DIV,
+        theme: 'gray',
+        charCounterMax:150
+      }
+    }
+  
+    ko.applyBindings( viewModel, document.getElementById( 'app' ) );
+  })();
+   
+
+})
+})
+})
+})
+
 
 A Requirejs demo app is included in the repository. You can refer it for more details.
  
