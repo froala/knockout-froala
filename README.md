@@ -57,6 +57,95 @@ or a `<div>`
 <div data-bind="froala: comments, froalaOptions: options"></div>
 ```
 
+
+## How to use with require js
+In order to use knockout-froala with require js, you require code snippet similar to following:
+
+
+1. // Froala Editor plugins list.
+
+    var fe_plugins = ['align', 'char_counter', 'code_view', 'colors', 'draggable', 'emoticons',
+                      'entities', 'file', 'font_family', 'font_size', 'fullscreen',
+                      'image_manager', 'image', 'inline_style', 'line_breaker',
+                      'link', 'lists', 'paragraph_format', 'paragraph_style', 'quote',
+                      'save', 'table', 'url', 'video']
+    // Define paths.
+    var paths = {
+      'app': '../app',
+      'FroalaEditor': '../../../bower_components/froala-wysiwyg-editor/js/froala_editor.min',
+
+      'knockout':'../../../bower_components/knockout/dist/knockout.debug',
+      'knockout-froala':'../../../src/knockout-froala'
+    };
+    // Add Froala Editor plugins to path.
+    for (var i = 0; i < fe_plugins.length; i++) {
+      paths['fe_' + fe_plugins[i]] = '../../../bower_components/froala-wysiwyg-editor/js/plugins/' + fe_plugins[i] + '.min';
+    }
+    var shim = {
+
+   
+    };
+    for (var i = 0; i < fe_plugins.length; i++) {
+      shim['fe_' + fe_plugins[i]] = {
+        deps: ['FroalaEditor']
+
+      }
+    }
+    // Init RequireJS.
+    requirejs.config({
+      'baseUrl': 'js/lib',
+      'paths': paths,
+      shim: shim
+    });
+
+    // Load the main app module to start the app
+
+    
+    requirejs(["app"]);
+
+
+Where:
+1.fe_plugins denote list of froala plugins.
+2.paths variable defines the path of all resources.
+3.shim variable defines dependencies among  js files.
+4.app.js  contains the logic of your app.
+
+2. Here is app.js code:
+
+requirejs(["knockout"],function(ko)
+{
+window.ko=ko;
+requirejs(["FroalaEditor"],function(FroalaEditor)
+{
+ window.FroalaEditor = FroalaEditor;
+requirejs(["knockout-froala"],function()
+{
+
+
+requirejs(["fe_image","fe_char_counter"], function() {
+
+  (function(){
+    var viewModel = {
+      html: ko.observable( '' ),
+      options: {
+        enter: FroalaEditor.ENTER_DIV,
+        theme: 'gray',
+        charCounterMax:150
+      }
+    }
+  
+    ko.applyBindings( viewModel, document.getElementById( 'app' ) );
+  })();
+   
+
+})
+})
+})
+})
+
+
+A Requirejs demo app is included in the repository. You can refer it for more details.
+ 
 ## License
 
 The `knockout-froala` project is under MIT license. However, in order to use Froala WYSIWYG HTML Editor plugin you should purchase a license for it.
