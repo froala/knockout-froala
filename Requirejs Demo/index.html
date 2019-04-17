@@ -60,9 +60,7 @@
     // Define paths.
     var paths = {
       'app': '../app',
-
-      'FroalaEditor': '../../../bower_components/froala-wysiwyg-editor/js/froala_editor.min',
-
+      '../froala_editor.min':'../../../bower_components/froala-wysiwyg-editor/js/froala_editor.min',
       'knockout':'../../../bower_components/knockout/dist/knockout.debug',
       'knockout-froala':'../../../src/knockout-froala'
     };
@@ -76,7 +74,7 @@
     };
     for (var i = 0; i < fe_plugins.length; i++) {
       shim['fe_' + fe_plugins[i]] = {
-        deps: ['FroalaEditor']
+        deps: ['../froala_editor.min']
 
       }
     }
@@ -84,7 +82,8 @@
     requirejs.config({
       'baseUrl': 'js/lib',
       'paths': paths,
-      shim: shim
+      'shim': shim
+     
     });
 
     // Load the main app module to start the app
