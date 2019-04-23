@@ -57,7 +57,9 @@ or a `<div>`
 <div data-bind="froala: comments, froalaOptions: options"></div>
 ```
 
-
+## Including All Plugins
+ Use froala_editor.pkgd.legacy.min file to include all plugins
+ 
 ## How to use with require js
 In order to use knockout-froala with require js, you require code snippet similar to following:
 
