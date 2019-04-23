@@ -3,7 +3,7 @@
 requirejs(["knockout"],function(ko)
 {
 window.ko=ko;
-requirejs(["../froala_editor.min"],function(FroalaEditor)
+requirejs(["FroalaEditor"],function(FroalaEditor)
 {
  window.FroalaEditor = FroalaEditor;
 requirejs(["knockout-froala"],function()
