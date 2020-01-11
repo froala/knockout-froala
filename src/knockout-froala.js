@@ -42,6 +42,8 @@
 options.events = {
   initialized: function() {
     editorInstance=this;
+    var modelValue = unwrap( value() );
+    editorInstance.html.set( modelValue );
     // provide froala editor instance for flexibility
     if(allBindings.froalaInstance && ko.isWriteableObservable( allBindings.froalaInstance ) ) {
       allBindings.froalaInstance( editorInstance );
