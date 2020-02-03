@@ -56,7 +56,16 @@ or a `<div>`
 ```html
 <div data-bind="froala: comments, froalaOptions: options"></div>
 ```
+#### You can also pass [events](https://www.froala.com/wysiwyg-editor/docs/events) 
 
+Inside `knockout-froala.js`-
+
+ ```
+ 'focus': function () {
+    // this is the editor instance.
+    console.log(this);
+  }
+  ```
 ## Including All Plugins
  Use froala_editor.pkgd.legacy.min file to include all plugins
  
