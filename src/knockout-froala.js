@@ -74,9 +74,16 @@ options.events = {
    * @api public
    */
 
-  function update( element, value ) {
+  function update( element, value, bindings ) {
   
     var modelValue = unwrap( value() );
+
+    //if froalaInstance defined, use that for the editor instance
+    var allBindings = unwrap( bindings() );
+    if(allBindings.froalaInstance && ko.isWriteableObservable( allBindings.froalaInstance ) ) {
+      editorInstance = allBindings.froalaInstance();
+    }
+
  
     if( editorInstance == null  ) {
       return;
