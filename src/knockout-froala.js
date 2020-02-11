@@ -58,7 +58,7 @@ options.events = {
     
 
     // cleanup editor, when dom node is removed
-    ko.utils.domNodeDisposal.addDisposeCallback( element, destroy( element ) );
+    ko.utils.domNodeDisposal.addDisposeCallback( element, destroy( element, bindings ) );
 
     // do not handle child nodes
     return { controlsDescendantBindings: true };
@@ -107,8 +107,14 @@ options.events = {
    * @api private
    */
 
-  function destroy( element ) {
+  function destroy( element, bindings ) {
     return function() {
+      //if froalaInstance defined, use that for the editor instance
+      var allBindings = unwrap( bindings() );
+      if(allBindings.froalaInstance && ko.isWriteableObservable( allBindings.froalaInstance ) ) {
+        editorInstance = allBindings.froalaInstance();
+      }
+
       if( editorInstance!=null ) {
         editorInstance.destroy();
       }
