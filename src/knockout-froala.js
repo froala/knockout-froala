@@ -28,6 +28,11 @@
     var processUpdateEvent = function (e) {
     
       if (ko.isWriteableObservable(model)) {
+        //if froalaInstance defined, use that for the editor instance
+        if(allBindings.froalaInstance && ko.isWriteableObservable( allBindings.froalaInstance ) ) {
+          editorInstance = allBindings.froalaInstance();
+        }
+        
         if(editorInstance!=null)
         {
           var editorValue = editorInstance.html.get();
