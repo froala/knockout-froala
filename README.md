@@ -1,4 +1,4 @@
-# Knockout Froala WYSIWYG HTML Editor
+# Knockout Froala WYSIWYG HTML Editor (with events registration)
 
 [![npm](https://img.shields.io/npm/v/knockout-froala.svg)](https://www.npmjs.com/package/knockout-froala)
 [![npm](https://img.shields.io/npm/dm/knockout-froala.svg)](https://www.npmjs.com/package/knockout-froala)
@@ -27,6 +27,7 @@ to enable Froala binding on a textarea, you need to provide the following bindin
 * `froala`: the model observable behind the editor
 * `froalaOptions`: a plain object or an observable that will hold all the options to initalize the editor
 * `froalaInstance`: [ optional ] if provided, froala instance will be stored in this observable once initialized ( should be observable )
+* `froalaEvents`: [ optional ] if provided, specified events will be registered to the froala instance
 
 ```js
 var viewModel = {
@@ -39,6 +40,11 @@ var viewModel = {
     // we like gray!
     theme: 'gray',
     toolbarButtons: [ 'bold', 'italic', 'underline' ]
+  },
+  events: {
+    'initialized': function (e, editor) {
+      console.log('INITIALIZED');
+    }
   }
 }
 
@@ -48,13 +54,13 @@ ko.applyBindings( viewModel );
 Using a `<textarea>`
 
 ```html
-<textarea data-bind="value: comments, froala: comments, froalaOptions: options"></textarea>
+<textarea data-bind="value: comments, froala: comments, froalaOptions: options, froalaEvents: events"></textarea>
 ```
 
 or a `<div>`
 
 ```html
-<div data-bind="froala: comments, froalaOptions: options"></div>
+<div data-bind="froala: comments, froalaOptions: options, froalaEvents: events"></div>
 ```
 #### You can also pass [events](https://www.froala.com/wysiwyg-editor/docs/events) 
 
