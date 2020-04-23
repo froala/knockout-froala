@@ -3,7 +3,7 @@
   "version": "2.9.7",
   "homepage": "https://github.com/froala/knockout-froala",
   "authors": [
-    "Anas Nakawa <anas.nakawa@gmail.com>"
+    "Froala Labs <kapil.garg.techy@gmail.com>"
   ],
   "description": "Knockout.js binding for Froala WYSIWYG HTML Rich Text Editor",
   "main": "src/knockout-froala.js",
