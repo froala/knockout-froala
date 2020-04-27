@@ -57,6 +57,14 @@ or a `<div>`
 <div data-bind="froala: comments, froalaOptions: options"></div>
 ```
 
+Changes in file `index.html`
+```
+<link rel="stylesheet" href="../bower_components/font-awesome/css/fontawesome.min.css" />
+```
+And
+```
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+```
 
 ## How to use with require js
 In order to use knockout-froala with require js, you require code snippet similar to following:
