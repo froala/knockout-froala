@@ -1,6 +1,6 @@
 {
   "name": "knockout-froala",
-  "version": "2.9.7",
+  "version": "2.9.8",
   "homepage": "https://github.com/froala/knockout-froala",
   "authors": [
     "Froala Labs <kapil.garg.techy@gmail.com>"
@@ -35,7 +35,7 @@
     "tests"
   ],
   "dependencies": {
-    "froala-wysiwyg-editor": "2.9.7",
+    "froala-wysiwyg-editor": "2.9.8",
     "knockout": "~3.5.0"
   },
   "resolutions": {
