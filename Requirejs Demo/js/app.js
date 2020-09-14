@@ -10,7 +10,7 @@ requirejs(["knockout-froala"],function()
 {
 
 
-requirejs(["fe_image","fe_char_counter"], function() {
+requirejs(function() {
 
 
   (function(){
