@@ -1,6 +1,6 @@
 {
   "name": "knockout-froala",
-  "version": "3.2.5-2",
+  "version": "3.2.6",
   "description": "Knockout.js binding for Froala WYSIWYG HTML Rich Text Editor",
   "main": "src/knockout-froala.js",
   "scripts": {
