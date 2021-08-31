@@ -66,9 +66,6 @@
       element['data-froala.editor'].destroy();
     });
 
-    // remove iframe only embedding restrictions, some vendors now wrap snippets in divs for responsivness.
-    FroalaEditor.VIDEO_EMBED_REGEX = /.*/;
-
     // do not handle child nodes (e.g. if user pasted KO laced content.)
     return {
       controlsDescendantBindings: true,
