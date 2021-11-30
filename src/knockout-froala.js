@@ -1,12 +1,11 @@
+/* global FroalaEditor */
+
 /**
  * knockout binding for Froala Editor
  */
+(function () {
+  'use strict';
 
-(function() { 'use strict';
-
-  // locals
-  var unwrap = ko.utils.unwrapObservable;
-  var editorInstance =null;
   /**
    * initiate froala editor, listen to its changes
    * and updates the underlying observable model
@@ -16,136 +15,92 @@
    * @param {object} bindings
    * @api public
    */
-
-  function init( element, value, bindings ) {
-   
+  function init(element, value, bindings) {
     var model = value();
-    var allBindings = unwrap( bindings() );
-    var options = ko.toJS( allBindings.froalaOptions );
+    var allBindings = ko.utils.unwrapObservable(bindings());
+    var options = allBindings.froalaOptions ? ko.toJS(allBindings.froalaOptions) : {};
 
     // register events before initializing the editor
-    for( var eventName in allBindings.froalaEvents ) {
-      $el.on( 'froalaEditor.' + eventName, allBindings.froalaEvents[eventName] );
+    for (var eventName in allBindings.froalaEvents) {
+      options.events[eventName] = allBindings.froalaEvents[eventName];
     }
+
+    // update underlying KO model whenever editor content changed
+    var processUpdateEvent = function (editorInstance) {
+      if (ko.isWriteableObservable(model)) {
+        var editorValue = editorInstance.html.get();
+        var current = model();
+        if (current !== editorValue) {
+          model(editorValue);
+        }
+      }
+    };
+
+    options.events = {
+      contentChanged: function () {
+        processUpdateEvent(this);
+      },
+      'paste.after': function () {
+        processUpdateEvent(this);
+      },
+      'image.beforeUpload': function (files) {
+        var editorInstance = this;
+        if (files.length) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            var result = e.target.result;
+            editorInstance.image.insert(result, null, null, editorInstance.image.get());
+            processUpdateEvent(editorInstance);
+          };
+          reader.readAsDataURL(files[0]);
+        }
+        return false;
+      },
+    };
 
     // initialize the editor
-    $el.froalaEditor( options || {} );
-
-    // provide froala editor instance for flexibility
-    if( allBindings.froalaInstance && ko.isWriteableObservable( allBindings.froalaInstance ) ) {
-      allBindings.froalaInstance( $el.data( 'froala.editor' ) );
-    
-
-    // update underlying model whenever editor content changed
-    var processUpdateEvent = function (e) {
-    
-      if (ko.isWriteableObservable(model)) {
-        //if froalaInstance defined, use that for the editor instance
-        if(allBindings.froalaInstance && ko.isWriteableObservable( allBindings.froalaInstance ) ) {
-          editorInstance = allBindings.froalaInstance();
-        }
-        
-        if(editorInstance!=null)
-        {
-          var editorValue = editorInstance.html.get();
-          var current = model();
-          if (current !== editorValue) {
-              model(editorValue);
-          }
-        }
-        
-      }
-  }
-options.events = {
-  initialized: function() {
-    editorInstance=this;
-    // provide froala editor instance for flexibility
-    if(allBindings.froalaInstance && ko.isWriteableObservable( allBindings.froalaInstance ) ) {
-      allBindings.froalaInstance( editorInstance );
-    }
-  },
-  'contentChanged': processUpdateEvent,
-  'paste.after':processUpdateEvent
-}
- new FroalaEditor(element,options||{});
- 
-
-    
-
-    
+    new FroalaEditor(element, options);
 
     // cleanup editor, when dom node is removed
-    ko.utils.domNodeDisposal.addDisposeCallback( element, destroy( element, bindings ) );
+    ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
+      element['data-froala.editor'].destroy();
+    });
 
-    // do not handle child nodes
-    return { controlsDescendantBindings: true };
+    // do not handle child nodes (e.g. if user pasted KO laced content.)
+    return {
+      controlsDescendantBindings: true,
+    };
   }
 
-
   /**
-   * update froala editor whenever underlying observable model
-   * is updated
-   *
-   * @param {element} element
-   * @param {object} value
-   * @api public
-   */
+      * update froala editor whenever underlying observable model
+      * is updated
+      *
+      * @param {element} element
+      * @param {object} value
+      * @api public
+      */
+  function update(element, value) {
+    var modelValue = ko.utils.unwrapObservable(value());
 
-  function update( element, value, bindings ) {
-  
-    var modelValue = unwrap( value() );
+    if (element) {
+      var editorInstance = element['data-froala.editor'];
+      if (editorInstance.html) {
+        var editorValue = editorInstance.html.get();
 
-    //if froalaInstance defined, use that for the editor instance
-    var allBindings = unwrap( bindings() );
-    if(allBindings.froalaInstance && ko.isWriteableObservable( allBindings.froalaInstance ) ) {
-      editorInstance = allBindings.froalaInstance();
-    }
-
- 
-    if( editorInstance == null  ) {
-      return;
-    }
-    
-     var editorValue = editorInstance.html.get();
-     
-    // avoid any un-necessary updates
-    if( editorValue !== modelValue && (typeof modelValue === 'string'  || modelValue === null)) {
-      editorInstance.html.set( modelValue );
-     
-    }
-  }
-
-
-  /**
-   * destroy froala editor instance
-   *
-   * @param {dom} element
-   * @return {function} handler
-   * @api private
-   */
-
-  function destroy( element, bindings ) {
-    return function() {
-      //if froalaInstance defined, use that for the editor instance
-      var allBindings = unwrap( bindings() );
-      if(allBindings.froalaInstance && ko.isWriteableObservable( allBindings.froalaInstance ) ) {
-        editorInstance = allBindings.froalaInstance();
-      }
-
-      if( editorInstance!=null ) {
-        editorInstance.destroy();
+        // avoid any un-necessary updates
+        if (editorValue !== modelValue && (typeof modelValue === 'string' || modelValue === null)) {
+          editorInstance.html.set(modelValue);
+        }
       }
     }
   }
-
 
   /**
    * expose `froala` binding handler methods
-   */
-
+  */
   ko.bindingHandlers.froala = {
     init: init,
-    update: update
-  }
-
+    update: update,
+  };
 })();
