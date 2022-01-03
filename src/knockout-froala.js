@@ -29,7 +29,6 @@
     }
 
     // initialize the editor
-    //$el.froalaEditor( options || {} );
 
     // provide froala editor instance for flexibility
     if( allBindings.froalaInstance && ko.isWriteableObservable( allBindings.froalaInstance ) ) {
