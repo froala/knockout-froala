@@ -29,12 +29,11 @@
     }
 
     // initialize the editor
-    $el.froalaEditor( options || {} );
 
     // provide froala editor instance for flexibility
     if( allBindings.froalaInstance && ko.isWriteableObservable( allBindings.froalaInstance ) ) {
       allBindings.froalaInstance( $el.data( 'froala.editor' ) );
-    
+    }
 
     // update underlying model whenever editor content changed
     var processUpdateEvent = function (e) {
