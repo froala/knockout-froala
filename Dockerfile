@@ -17,7 +17,7 @@ RUN wget --no-check-certificate --user ${NexusUser}  --password ${NexusPassword}
 RUN npm install -g bower
 RUN npm install
 RUN bower install
-sFROM nginx:alpine
+FROM nginx:alpine
 copy --from=build /app /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
