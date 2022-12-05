@@ -2,10 +2,10 @@ git:
   depth: false
   quiet: false
 language: generic
-dist: bionic 
+dist: bionic
 sudo: required
 branches:
-only:
+  only:
     - /dev*/
     - /AO-dev*/
     - /QA*/
@@ -31,4 +31,4 @@ notifications:
     recipients:
       - harasunu.narayan@froala.com
     on_success: always
-    on_failure: always 
+    on_failure: always
