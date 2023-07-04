@@ -89,7 +89,9 @@ SHORT_TRAVIS_BRANCH=`echo ${SHORT_TRAVIS_BRANCH} | sed -r 's/-//g'`
 SHORT_TRAVIS_BRANCH=`echo ${SHORT_TRAVIS_BRANCH} | sed -r 's/\.//g'`
 SHORT_TRAVIS_BRANCH=`echo ${SHORT_TRAVIS_BRANCH} | sed -r 's/_//g'`
 echo " short branch name : ${SHORT_TRAVIS_BRANCH}"
-DEPLOYMENT_URL="${SHORT_REPO_NAME}-${SHORT_TRAVIS_BRANCH}.${SDK_ENVIRONMENT}.${BASE_DOMAIN}"
+#changes 
+DEPLOYMENT_URL="${CONTAINER_NAME}.${SDK_ENVIRONMENT}.${BASE_DOMAIN}"
+
 echo " deployment URL: https://${DEPLOYMENT_URL}"
 cp docker-compose.yml.template docker-compose.yml
 LW_REPO_NAME=`echo "${BUILD_REPO_NAME}" | tr '[:upper:]' '[:lower:]'`
