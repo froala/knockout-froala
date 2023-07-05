@@ -159,6 +159,7 @@ if [ "${EXISTING_DEPLOYMENTS_NR}" -lt "${MAX_DEPLOYMENTS_NR}" ]; then
     deploy
 fi
 
+
 # If existing deployment equals max deployment then delete oldest container.
 if [ "${EXISTING_DEPLOYMENTS_NR}" -ge "${MAX_DEPLOYMENTS_NR}" ]; then
     
