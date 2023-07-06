@@ -18,6 +18,6 @@ RUN npm install -g bower
 RUN npm install
 RUN bower install
 FROM nginx:alpine
-copy --from=build /app /usr/share/nginx/html
+COPY --from=build /app /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
