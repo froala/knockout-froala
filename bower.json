@@ -1,7 +1,7 @@
 {
   "name": "knockout-froala",
 
-  "version": "4.0.19",
+  "version": "4.1.0",
 
   "homepage": "https://github.com/froala/knockout-froala",
   "authors": [
@@ -38,7 +38,7 @@
   ],
   "dependencies": {
 
-    "froala-wysiwyg-editor": "4.0.19",
+    "froala-wysiwyg-editor": "4.1.0",
     "font-awesome": "^4.7.0",
 
     "knockout": "~3.5.0"
