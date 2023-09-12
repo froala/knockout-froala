@@ -1,6 +1,6 @@
 {
   "name": "knockout-froala",
-  "version": "4.1.1",
+  "version": "4.1.2",
   "description": "Knockout.js binding for Froala WYSIWYG HTML Rich Text Editor",
   "main": "src/knockout-froala.js",
   "scripts": {
@@ -34,6 +34,6 @@
   "homepage": "https://www.froala.com/wysiwyg-editor",
   "devDependencies": {
     "grunt": "^0.4.5",
-    "grunt-release": "^0.13.0"
+    "grunt-release": "^0.14.0"
   }
 }
