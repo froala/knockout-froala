@@ -73,7 +73,7 @@ jobs:
 
       - name: Update bower.json
         run: |
-          jq --arg VERSION "$VERSION" '.version = $VERSION' bower.json > tmp.json
+          jq --arg VERSION "$VERSION" '.version = $VERSION | .dependencies["froala-wysiwyg-editor"] = $VERSION' bower.json > tmp.json
           mv tmp.json bower.json
 
       - name: Commit changes
