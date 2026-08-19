@@ -1,6 +1,6 @@
 {
   "name": "knockout-froala",
-  "version": "5.3.1",
+  "version": "5.4.0",
   "homepage": "https://github.com/froala/knockout-froala",
   "authors": [
     "Anas Nakawa <anas.nakawa@gmail.com>"
@@ -35,7 +35,7 @@
     "tests"
   ],
   "dependencies": {
-    "froala-wysiwyg-editor": "5.3.1",
+    "froala-wysiwyg-editor": "5.4.0",
     "font-awesome": "^4.7.0",
     "knockout": "~3.5.0"
   },
